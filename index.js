@@ -28,6 +28,7 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+
  * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
@@ -82,12 +83,17 @@ finalScore(inning, 9) might return:
 */ 
 
 function finalScore(num, callback){
-  let score = 0;
+  let homescore = 0;
+  let awayscore = 0;
   /*Code Here*/
   for(let i = 0; i < num; i++){
-    score = score + callback();
+    homescore = homescore + callback();
+    awayscore = awayscore + callback();
   }
-  return score;
+  return {
+    'Home': homescore,
+    'Away': awayscore
+  };
 
 }
 
