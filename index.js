@@ -28,6 +28,8 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * returns function counter() vs calls function counter2()
+ * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
@@ -56,11 +58,15 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
     /*Code Here*/
+    let points = Math.floor(Math.random() * 3);
+    return points
 
 }
+
+console.log(inning());
 
 /* Task 3: finalScore()
 
@@ -76,11 +82,17 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
+function finalScore(num, callback){
+  let score = 0;
   /*Code Here*/
+  for(let i = 0; i < num; i++){
+    score = score + callback();
+  }
+  return score;
 
 }
+
+console.log(finalScore(9, inning));
 
 /* Task 4: 
 
@@ -103,8 +115,34 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
+function scoreboard(callback, num) {
   /* CODE HERE */
+  let team1 = 0;
+  let team2 = 0;
+
+  for(let i = 1; i < num + 1; i++){
+    let inningScore1 = callback();
+    let inningScore2 = callback();
+
+    team1 += inningScore1;
+    team2 += inningScore2;
+    if(i === 1){
+      console.log(`1st inning: ${inningScore1} - ${inningScore2}`)
+    }
+    else if(i === 2){
+      console.log(`2nd inning: ${inningScore1} - ${inningScore2}`)
+    }
+    else if(i === 3){
+      console.log(`3rd inning: ${inningScore1} - ${inningScore2}`)
+    }
+    else{
+      console.log(`${i}th inning: ${inningScore1} - ${inningScore2}`)
+    }
+    
+    
+  }
+  console.log(`Final Score: ${team1} - ${team2}`)
 }
 
+scoreboard(inning, 9);
 
